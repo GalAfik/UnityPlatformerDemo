@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
-            animator.SetBool("IsJumping", true);
         }
 
         if (Input.GetButtonDown("Crouch"))
@@ -37,11 +36,9 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = false;
         }
-    }
-
-    public void OnLanding ()
-    {
-        animator.SetBool("IsJumping", false);
+    
+        // Set the speed for the animator to determine if jumping or falling
+        animator.SetFloat("VerticalSpeed", this.GetComponent<Rigidbody2D>().velocity.y);
     }
 
     public void OnCrouching (bool isCrouching)
